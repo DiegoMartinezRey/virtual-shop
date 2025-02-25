@@ -25,9 +25,27 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body{
-        font-family: sans-serif;
+        font-family: 'Arial', sans-serif;
         margin: 0;
-        background-color: #333;
+        background-color: ${props => props.theme.colors.background};
+        color: ${props => props.theme.colors.text};
+    }
+
+    h1, h2, h3,h4, p{
+        margin: 0;
+    }
+
+    h1{
+        font-size: ${props => props.theme.fontSizes.text_2xl};
+    }
+    h2{
+        font-size: ${props => props.theme.fontSizes.text_xl};
+    }
+    h3{
+        font-size: ${props => props.theme.fontSizes.text_l};
+    }
+    h4{
+        font-size: ${props => props.theme.fontSizes.text_m};
     }
 
 `;

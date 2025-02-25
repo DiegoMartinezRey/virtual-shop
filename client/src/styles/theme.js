@@ -1,10 +1,10 @@
 export const theme = {
 	navBar: {
-		height: '56px'
+		height: '70px'
 	},
 	colors: {
 		primary: '#0f0f0f',
-		secondary: '#00AE02',
+		secondary: '#3BA934',
 		background: '#282828',
 		text: '#ffffff'
 	},

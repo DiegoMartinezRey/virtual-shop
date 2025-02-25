@@ -5,6 +5,8 @@ const StyledButton = styled.button`
 	padding: 10px;
 	border-radius: 0.6rem;
 	background-color: ${({ $color }) => $color};
+	font-weight: bold;
+	color: white;
 `;
 
 export { StyledButton };

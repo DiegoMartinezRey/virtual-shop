@@ -17,7 +17,7 @@ const StyledRegisterContainer = styled.section`
 	background-color: ${props => props.theme.colors.primary};
 	border-radius: 20px;
 	padding: 3rem;
-	width: 60%;
+	width: 80%;
 	max-width: 600px;
 	box-shadow: 0 0 10px ${props => props.theme.colors.primary};
 `;

@@ -1,13 +1,25 @@
+import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
+import InputText from '../../components/inputText/InputText';
+import {
+	StyledLoginContainer,
+	StyledLoginForm,
+	StyledLoginPage
+} from './login.styles';
+
 const Login = () => {
 	return (
-		<section>
-			<h1>Sign In</h1>
-			<form>
-				<input type='email' placeholder='Email' />
-				<input type='password' placeholder='Password' />
-				<button type='submit'>Sign In</button>
-			</form>
-		</section>
+		<StyledLoginPage>
+			<StyledLoginContainer>
+				<h1>Sign In</h1>
+				<StyledLoginForm>
+					<InputText type='email' label={'Email'} />
+					<InputText type='password' label={'Password'} />
+					<ButtonGeneral color={props => props.theme.colors.secondary}>
+						Sign In
+					</ButtonGeneral>
+				</StyledLoginForm>
+			</StyledLoginContainer>
+		</StyledLoginPage>
 	);
 };
 

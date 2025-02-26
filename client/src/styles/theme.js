@@ -4,7 +4,7 @@ export const theme = {
 	},
 	colors: {
 		primary: '#0f0f0f',
-		secondary: '#3BA934',
+		secondary: '#00AE02',
 		background: '#282828',
 		text: '#ffffff'
 	},

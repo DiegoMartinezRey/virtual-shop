@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledRegisterPage = styled.section`
+const StyledLoginPage = styled.section`
 	height: calc(100vh - ${props => props.theme.navBar.height});
 	display: flex;
 	flex-direction: column;
@@ -8,7 +8,7 @@ const StyledRegisterPage = styled.section`
 	align-items: center;
 `;
 
-const StyledRegisterContainer = styled.section`
+const StyledLoginContainer = styled.section`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -23,11 +23,11 @@ const StyledRegisterContainer = styled.section`
 	box-shadow: 0 0 10px ${props => props.theme.colors.primary};
 `;
 
-const StyledRegisterForm = styled.form`
+const StyledLoginForm = styled.form`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 `;
 
-export { StyledRegisterContainer, StyledRegisterForm, StyledRegisterPage };
+export { StyledLoginContainer, StyledLoginForm, StyledLoginPage };

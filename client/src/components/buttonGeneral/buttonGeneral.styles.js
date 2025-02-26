@@ -7,6 +7,7 @@ const StyledButton = styled.button`
 	background-color: ${({ $color }) => $color};
 	font-weight: bold;
 	color: white;
+	border: none;
 `;
 
 export { StyledButton };

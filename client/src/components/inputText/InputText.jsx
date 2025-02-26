@@ -4,11 +4,16 @@ import {
 	StyledLabel
 } from './inputText.styles';
 
-const InputText = ({ type, placeholder, label }) => {
+const InputText = ({ type, placeholder, label, value, onChange }) => {
 	return (
 		<StyledInputContainer>
 			<StyledLabel>{label}</StyledLabel>
-			<StyledInput type={type} placeholder={placeholder} />
+			<StyledInput
+				type={type}
+				placeholder={placeholder}
+				value={value}
+				onChange={onChange}
+			/>
 		</StyledInputContainer>
 	);
 };

@@ -25,7 +25,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body{
-        font-family: 'Arial', sans-serif;
+        font-family: "Quicksand", serif;
         margin: 0;
         background-color: ${props => props.theme.colors.background};
         color: ${props => props.theme.colors.text};

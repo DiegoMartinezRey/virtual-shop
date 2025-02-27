@@ -64,24 +64,31 @@ const userController = {
     }
   },
   checkUser: async (req, res) => {
-    const { email, password } = req.body;
-    const [userFound] = await User.find({ email: email });
-    if (!userFound) return res.status(401).json({ msg: "User not found" });
-    if (await bcrypt.compare(password, userFound.password)) {
-      const token = jwt.sign({ email: userFound.email }, process.env.SECRET, {
-        expiresIn: 3600, // 1 hour
-      });
-      const user = await User.findOne({ _id: userFound._id });
-      return res.status(200).json({
-        msg: "Userlogged",
-        token,
-        id: user._id,
-        name: user.name,
-        surname: user.surname,
-        role: user.role,
-      });
+    try {
+      const { email, password } = req.body;
+
+      const [userFound] = await User.find({ email: email }).select("+password");
+
+      if (!userFound) return res.status(401).json({ msg: "User not found" });
+
+      if (await bcrypt.compare(password, userFound.password)) {
+        const token = jwt.sign({ email: userFound.email }, process.env.SECRET, {
+          expiresIn: 3600,
+        });
+        const user = await User.findOne({ _id: userFound._id });
+        return res.status(200).json({
+          msg: "Userlogged",
+          token,
+          id: user._id,
+          name: user.name,
+          lastName: user.lastName,
+          role: user.role,
+        });
+      }
+      return res.status(203).json({ msg: "Password does not match" });
+    } catch (error) {
+      return res.status(404).json({ msg: "Error to login", error });
     }
-    return res.status(404).json({ msg: "Password does not match" });
   },
   verifyToken: (req, res, next) => {
     const token = req.headers.authorization;

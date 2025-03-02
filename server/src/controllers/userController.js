@@ -67,42 +67,40 @@ const userController = {
     try {
       const { email, password } = req.body;
 
-      const [userFound] = await User.find({ email: email }).select("+password");
+      const userFound = await User.findOne({ email }).select("+password");
 
-      if (!userFound) return res.status(401).json({ msg: "User not found" });
-
-      if (await bcrypt.compare(password, userFound.password)) {
-        const token = jwt.sign({ email: userFound.email }, process.env.SECRET, {
-          expiresIn: 3600,
-        });
-        const user = await User.findOne({ _id: userFound._id });
-        return res.status(200).json({
-          msg: "Userlogged",
-          token,
-          id: user._id,
-          name: user.name,
-          lastName: user.lastName,
-          role: user.role,
-        });
+      if (!userFound) {
+        return res.status(401).json({ msg: "User not found" });
       }
-      return res.status(203).json({ msg: "Password does not match" });
-    } catch (error) {
-      return res.status(404).json({ msg: "Error to login", error });
-    }
-  },
-  verifyToken: (req, res, next) => {
-    const token = req.headers.authorization;
-    if (!token) res.status(400).json({ msg: "Missing token" });
-    try {
-      jwt.verify(token, process.env.SECRET, function (err, decoded) {
-        if (err) {
-          return res.status(401).send("Token is invalid");
-        }
-        req.user = decoded;
-        return next();
+
+      const isMatch = await bcrypt.compare(password, userFound.password);
+      if (!isMatch) {
+        return res.status(403).json({ msg: "Password does not match" });
+      }
+
+      const token = jwt.sign(
+        {
+          _id: userFound._id,
+          email: userFound.email,
+          name: userFound.name,
+          lastName: userFound.lastName,
+          role: userFound.role,
+        },
+        process.env.SECRET,
+        { expiresIn: "7d" }
+      );
+
+      return res.status(200).json({
+        msg: "UserLogged",
+        token,
+        _id: userFound._id,
+        name: userFound.name,
+        lastName: userFound.lastName,
+        role: userFound.role,
       });
     } catch (error) {
-      return res.status(404).json({ msg: "Token not valid or expired" });
+      console.error("Error in login:", error);
+      return res.status(500).json({ msg: "Error logging in", error });
     }
   },
 };

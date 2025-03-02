@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
 import InputText from '../../components/inputText/InputText';
+import { useAuth } from '../../contexts/UserContext';
 import {
 	StyledLoginContainer,
 	StyledLoginForm,
@@ -12,6 +13,8 @@ import {
 const Login = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
+
+	const { login } = useAuth();
 
 	const navigate = useNavigate();
 
@@ -24,10 +27,11 @@ const Login = () => {
 				password: passwordInput
 			});
 
-			if (response?.data?.msg === 'Userlogged') {
+			if (response.data._id) {
+				login(response.data);
 				navigate('/');
 			} else {
-				console.log('Error to login');
+				console.log('Error al iniciar sesión');
 			}
 
 			setEmailInput('');

@@ -6,7 +6,8 @@ export const theme = {
 		primary: '#0f0f0f',
 		secondary: '#00AE02',
 		background: '#282828',
-		text: '#ffffff'
+		text: '#ffffff',
+		red: 'rgb(247, 27, 27)'
 	},
 	fontSizes: {
 		text_2xl: '2.5rem',

@@ -32,7 +32,7 @@ const NavBar = () => {
 			<span>Shop</span>
 			<MenuOptions />
 			<StyledOptionsNavBar>
-				<FaShoppingCart />
+				<FaShoppingCart onClick={() => navigate('/cart')} />
 				<FaUser />
 				<StyledMenuBurger onClick={handleMenuBar}>
 					<FaBars />

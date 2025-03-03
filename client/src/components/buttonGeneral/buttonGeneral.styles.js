@@ -8,6 +8,8 @@ const StyledButton = styled.button`
 	font-weight: bold;
 	color: white;
 	border: none;
+	cursor: pointer;
+	/* align-self: self-start; */
 `;
 
 export { StyledButton };

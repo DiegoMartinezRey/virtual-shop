@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
 import InputText from '../../components/inputText/InputText';
 import {
@@ -14,6 +15,8 @@ const Register = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 
+	const navigate = useNavigate();
+
 	const url = import.meta.env.VITE_API_URL;
 
 	const registerUser = async () => {
@@ -24,6 +27,9 @@ const Register = () => {
 				email: emailInput,
 				password: passwordInput
 			});
+
+			navigate('/sign-in');
+
 			setNameInput('');
 			setLastNameInput('');
 			setEmailInput('');

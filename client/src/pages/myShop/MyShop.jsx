@@ -3,6 +3,11 @@ import { useState } from 'react';
 import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
 import InputText from '../../components/inputText/InputText';
 import { useAuth } from '../../contexts/UserContext';
+import {
+	StyledInputNumberContainer,
+	StyledMyShopContainer,
+	StyledMyShopPage
+} from './myShop.styles';
 
 const MyShop = () => {
 	const [nameProduct, setNameProduct] = useState('');
@@ -48,44 +53,48 @@ const MyShop = () => {
 	};
 
 	return (
-		<div>
-			<InputText
-				type='string'
-				label={'Name'}
-				value={nameProduct}
-				onChange={e => setNameProduct(e.target.value)}
-			/>
-			<InputText
-				type='string'
-				label={'Description'}
-				value={descriptionProduct}
-				onChange={e => setDescriptionProduct(e.target.value)}
-			/>
-			<InputText
-				type='number'
-				label={'Price'}
-				value={priceProduct}
-				onChange={e => setPriceProduct(e.target.value)}
-			/>
-			<InputText
-				type='number'
-				label={'Stock'}
-				value={stockProduct}
-				onChange={e => setStockProduct(e.target.value)}
-			/>
-			<InputText
-				type='string'
-				label={'Category'}
-				value={categoryProduct}
-				onChange={e => setCategoryProduct(e.target.value)}
-			/>
-			<ButtonGeneral
-				color={props => props.theme.colors.secondary}
-				onClick={createProduct}
-			>
-				Publish
-			</ButtonGeneral>
-		</div>
+		<StyledMyShopPage>
+			<StyledMyShopContainer>
+				<InputText
+					type='string'
+					label={'Name'}
+					value={nameProduct}
+					onChange={e => setNameProduct(e.target.value)}
+				/>
+				<InputText
+					type='string'
+					label={'Description'}
+					value={descriptionProduct}
+					onChange={e => setDescriptionProduct(e.target.value)}
+				/>
+				<StyledInputNumberContainer>
+					<InputText
+						type='number'
+						label={'Price'}
+						value={priceProduct}
+						onChange={e => setPriceProduct(e.target.value)}
+					/>
+					<InputText
+						type='number'
+						label={'Stock'}
+						value={stockProduct}
+						onChange={e => setStockProduct(e.target.value)}
+					/>
+				</StyledInputNumberContainer>
+				<InputText
+					type='string'
+					label={'Category'}
+					value={categoryProduct}
+					onChange={e => setCategoryProduct(e.target.value)}
+				/>
+				<ButtonGeneral
+					color={props => props.theme.colors.secondary}
+					onClick={createProduct}
+				>
+					Publish
+				</ButtonGeneral>
+			</StyledMyShopContainer>
+		</StyledMyShopPage>
 	);
 };
 

@@ -9,6 +9,9 @@ const StyledButton = styled.button`
 	color: white;
 	border: none;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	/* align-self: self-start; */
 `;
 

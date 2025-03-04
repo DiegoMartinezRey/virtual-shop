@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
+const orderRouter = require("./routes/orderRouter");
 const mongoose = require("mongoose");
 
 const user = process.env.MONGODB_USER;
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/user", userRouter);
 app.use("/product", productRouter);
+app.use("/order", orderRouter);
 
 app.listen(port, () => {
   console.log("Running server on Port: ", port);

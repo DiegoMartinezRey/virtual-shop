@@ -42,13 +42,29 @@ export const StyledProduct = styled.li`
 	gap: 1rem;
 `;
 
+export const StyledLine = styled.div`
+	width: 100%;
+	height: 2px;
+	background-color: ${props => props.theme.colors.secondary};
+	margin: 10px 0;
+`;
+
 export const StyledTotalContainer = styled.div`
-	p::before {
-		content: '';
-		display: block;
-		width: 100%;
-		height: 2px;
-		background-color: ${props => props.theme.colors.secondary};
-		margin: 10px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	width: 100%;
+`;
+
+export const StyledTotalText = styled.p`
+	font-size: ${props => props.theme.fontSizes.text_m};
+
+	span {
+		font-weight: bold;
 	}
+`;
+
+export const StyledButtonContainer = styled.div`
+	display: flex;
+	gap: 1rem;
 `;

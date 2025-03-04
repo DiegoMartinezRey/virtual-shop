@@ -3,15 +3,23 @@ import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
 import CartProduct from '../../components/cartProduct/CartProduct';
 import { CartContext } from '../../contexts/CartContext';
 import {
+	StyledButtonContainer,
 	StyledCartContainer,
 	StyledCartPage,
+	StyledLine,
 	StyledListProduct,
 	StyledProduct,
-	StyledTotalContainer
+	StyledTotalContainer,
+	StyledTotalText
 } from './shoppingCart.styles';
 
 const ShoppingCart = () => {
-	const { cart, clearCart } = useContext(CartContext);
+	const { cart, clearCart, sendCartToBackend } = useContext(CartContext);
+
+	const totalPrice = cart.reduce(
+		(acc, item) => acc + item.price * item.quantity,
+		0
+	);
 
 	return (
 		<StyledCartPage>
@@ -27,15 +35,16 @@ const ShoppingCart = () => {
 								</StyledProduct>
 							))}
 						</StyledListProduct>
+						<StyledLine />
 						<StyledTotalContainer>
-							<p>
-								Total: <span>100 €</span>
-							</p>
+							<StyledTotalText>
+								Total: <span>{totalPrice} €</span>
+							</StyledTotalText>
 						</StyledTotalContainer>
-						<div>
+						<StyledButtonContainer>
 							<ButtonGeneral
 								color={props => props.theme.colors.secondary}
-								// onClick={sendCartToBackend}
+								onClick={sendCartToBackend}
 							>
 								Finalizar Compra
 							</ButtonGeneral>
@@ -45,7 +54,7 @@ const ShoppingCart = () => {
 							>
 								Vaciar Carrito
 							</ButtonGeneral>
-						</div>
+						</StyledButtonContainer>
 					</>
 				)}
 			</StyledCartContainer>

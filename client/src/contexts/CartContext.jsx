@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
+import { useAuth } from './UserContext';
 
 export const CartContext = createContext();
 
@@ -8,12 +10,15 @@ export const CartProvider = ({ children }) => {
 		return savedCart ? JSON.parse(savedCart) : [];
 	});
 
+	const { user } = useAuth();
+
+	const url = import.meta.env.VITE_API_URL;
+
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
 
 	const addToCart = product => {
-		console.log(product);
 		setCart(prevCart => {
 			const existingItem = prevCart.find(item => item._id === product._id);
 			if (existingItem) {
@@ -31,25 +36,48 @@ export const CartProvider = ({ children }) => {
 		setCart(prevCart => prevCart.filter(item => item._id !== id));
 	};
 
+	const updateCartQuantity = (id, newQuantity) => {
+		if (newQuantity < 1) {
+			removeFromCart(id);
+		} else {
+			setCart(prevCart =>
+				prevCart.map(item =>
+					item._id === id ? { ...item, quantity: newQuantity } : item
+				)
+			);
+		}
+	};
+
 	const clearCart = () => {
 		setCart([]);
 	};
 
 	const sendCartToBackend = async () => {
-		const response = await fetch('https://api.tu-backend.com/checkout', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				userId: '123', // Si el usuario está autenticado
-				items: cart,
-				totalPrice: cart.reduce(
-					(acc, item) => acc + item.price * item.quantity,
+		const response = await axios.post(
+			`${url}/order/create`,
+			{
+				user: user?._id,
+				items: cart.map(item => ({
+					product: item?._id,
+					quantity: item?.quantity,
+					price: item?.price
+				})),
+				totalAmount: cart.reduce(
+					(acc, item) => acc + item?.quantity * item?.price,
 					0
-				)
-			})
-		});
+				),
+				paymentStatus: 'paid',
+				stripePaymentIntentId: 'stripeId'
+			},
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user?.token}`
+				}
+			}
+		);
 
-		if (response.ok) {
+		if (response.data.paymentStatus === 'paid') {
 			console.log('Compra realizada con éxito');
 			clearCart();
 		}
@@ -57,7 +85,14 @@ export const CartProvider = ({ children }) => {
 
 	return (
 		<CartContext.Provider
-			value={{ cart, addToCart, removeFromCart, clearCart, sendCartToBackend }}
+			value={{
+				cart,
+				addToCart,
+				removeFromCart,
+				updateCartQuantity,
+				clearCart,
+				sendCartToBackend
+			}}
 		>
 			{children}
 		</CartContext.Provider>

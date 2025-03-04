@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { CartProvider } from '../contexts/CartContext';
 import { AuthProvider } from '../contexts/UserContext';
+import useAxiosInterceptor from '../hooks/useAxiosInterceptor';
 import Layout from '../layout/Layout';
 import AboutUs from '../pages/aboutUs/AboutUs';
 import Home from '../pages/home/Home';
@@ -11,6 +12,7 @@ import Register from '../pages/register/Register';
 import ShoppingCart from '../pages/shoppingCart/ShoppingCart';
 
 const Router = () => {
+	useAxiosInterceptor();
 	return (
 		<AuthProvider>
 			<CartProvider>

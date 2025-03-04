@@ -30,4 +30,19 @@ const StyledRegisterForm = styled.form`
 	gap: 20px;
 `;
 
-export { StyledRegisterContainer, StyledRegisterForm, StyledRegisterPage };
+const StyledSpanAccount = styled.span`
+	color: ${props => props.theme.colors.secondary};
+	font-weight: 900;
+
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+`;
+
+export {
+	StyledRegisterContainer,
+	StyledRegisterForm,
+	StyledRegisterPage,
+	StyledSpanAccount
+};

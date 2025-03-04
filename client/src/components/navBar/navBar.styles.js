@@ -48,7 +48,8 @@ const StyledMenuSpan = styled.span`
 	@media (hover: hover) {
 		&:hover {
 			cursor: pointer;
-			color: ${props => props.theme.colors.secondary};
+			color: ${({ $showMenuBar, theme }) =>
+				$showMenuBar ? theme.colors.primary : theme.colors.secondary};
 		}
 	}
 `;
@@ -60,10 +61,20 @@ const StyledOptionsNavBar = styled.div`
 `;
 
 const StyledIconOptions = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: ${({ $login, theme }) =>
+		$login ? theme.colors.secondary : ''};
+	padding: 0.3rem;
+	border-radius: 0.8rem;
+
 	@media (hover: hover) {
 		&:hover {
 			cursor: pointer;
-			color: ${props => props.theme.colors.secondary};
+			background-color: white;
+			color: ${({ theme }) => theme.colors.secondary};
 		}
 	}
 `;

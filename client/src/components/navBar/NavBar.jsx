@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaBars, FaShoppingCart, FaTimes, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/UserContext';
 import {
 	StyledCloseMenu,
 	StyledIconOptions,
@@ -16,6 +17,9 @@ import {
 
 const NavBar = () => {
 	const [showMenuBar, setShowMenuBar] = useState(false);
+
+	const { user } = useAuth();
+
 	const navigate = useNavigate();
 
 	const handleMenuBar = () => setShowMenuBar(!showMenuBar);
@@ -31,7 +35,14 @@ const NavBar = () => {
 		return (
 			<StyledMenuWrapper>
 				{menuItems.map(item => (
-					<StyledMenuSpan key={item.path} onClick={() => navigate(item.path)}>
+					<StyledMenuSpan
+						key={item.path}
+						onClick={() => {
+							navigate(item.path);
+							isMobile ? handleMenuBar() : '';
+						}}
+						$showMenuBar={showMenuBar}
+					>
 						{item.label}
 					</StyledMenuSpan>
 				))}
@@ -46,24 +57,28 @@ const NavBar = () => {
 				alt='logo'
 				onClick={() => navigate('/')}
 			/>
-			<MenuOptions isMobile={false} /> {/* Desktop Menu */}
+			<MenuOptions isMobile={false} />
 			<StyledOptionsNavBar>
-				<StyledIconOptions>
-					<FaShoppingCart onClick={() => navigate('/cart')} />
+				<StyledIconOptions onClick={() => navigate('/cart')}>
+					<FaShoppingCart />
 				</StyledIconOptions>
-				<StyledIconOptions>
-					<FaUser onClick={() => navigate('/profile')} />
+				<StyledIconOptions
+					onClick={() => navigate('/profile')}
+					$login={user ? true : false}
+				>
+					{user && <span>Hola, {user?.name}!</span>}
+					<FaUser />
 				</StyledIconOptions>
 				<StyledMenuBurger onClick={handleMenuBar}>
 					<FaBars />
 				</StyledMenuBurger>
 			</StyledOptionsNavBar>
-			{/* Menú desplegable en móviles */}
+
 			<StyledMenuBar $showMenuBar={showMenuBar}>
 				<StyledCloseMenu>
 					<FaTimes onClick={handleMenuBar} />
 				</StyledCloseMenu>
-				<MenuOptions isMobile={true} /> {/* Mobile Menu */}
+				<MenuOptions isMobile={true} />
 			</StyledMenuBar>
 		</StyledNavBar>
 	);

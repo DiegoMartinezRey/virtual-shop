@@ -5,6 +5,7 @@ import { StyledProductsContainer } from './products.styles';
 
 const Products = () => {
 	const [allProducts, setAllProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const url = import.meta.env.VITE_API_URL;
 
@@ -18,12 +19,16 @@ const Products = () => {
 			setAllProducts(response.data);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
 		<StyledProductsContainer>
-			{allProducts &&
+			{loading && <span>Loading...</span>}
+			{!loading &&
+				allProducts &&
 				allProducts.map(product => (
 					<ProductCard key={product._id} product={product} />
 				))}

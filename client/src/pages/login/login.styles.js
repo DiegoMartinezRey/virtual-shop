@@ -30,4 +30,19 @@ const StyledLoginForm = styled.form`
 	gap: 20px;
 `;
 
-export { StyledLoginContainer, StyledLoginForm, StyledLoginPage };
+const StyledSpanAccount = styled.span`
+	color: ${props => props.theme.colors.secondary};
+	font-weight: 900;
+
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+`;
+
+export {
+	StyledLoginContainer,
+	StyledLoginForm,
+	StyledLoginPage,
+	StyledSpanAccount
+};

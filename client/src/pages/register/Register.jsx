@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
 import InputText from '../../components/inputText/InputText';
+import { useAuth } from '../../contexts/UserContext';
 import {
 	StyledRegisterContainer,
 	StyledRegisterForm,
-	StyledRegisterPage
+	StyledRegisterPage,
+	StyledSpanAccount
 } from './register.styles';
 
 const Register = () => {
@@ -15,9 +17,16 @@ const Register = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 
+	const { user } = useAuth();
+
 	const navigate = useNavigate();
 
 	const url = import.meta.env.VITE_API_URL;
+
+	if (user) {
+		navigate('/');
+		return null;
+	}
 
 	const registerUser = async () => {
 		try {
@@ -83,6 +92,12 @@ const Register = () => {
 						Sign Up
 					</ButtonGeneral>
 				</StyledRegisterForm>
+				<p>
+					Do you have an account?{' '}
+					<StyledSpanAccount onClick={() => navigate('/sign-in')}>
+						Sign In
+					</StyledSpanAccount>
+				</p>
 			</StyledRegisterContainer>
 		</StyledRegisterPage>
 	);

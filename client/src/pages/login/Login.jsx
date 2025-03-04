@@ -7,7 +7,8 @@ import { useAuth } from '../../contexts/UserContext';
 import {
 	StyledLoginContainer,
 	StyledLoginForm,
-	StyledLoginPage
+	StyledLoginPage,
+	StyledSpanAccount
 } from './login.styles';
 
 const Login = () => {
@@ -70,6 +71,12 @@ const Login = () => {
 						Sign In
 					</ButtonGeneral>
 				</StyledLoginForm>
+				<p>
+					Don`t have an account?{' '}
+					<StyledSpanAccount onClick={() => navigate('/sign-up')}>
+						Register
+					</StyledSpanAccount>
+				</p>
 			</StyledLoginContainer>
 		</StyledLoginPage>
 	);

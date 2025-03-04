@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const StyledMyShopPage = styled.div`
-	height: calc(100vh - ${props => props.theme.navBar.height});
+	min-height: calc(100vh - ${props => props.theme.navBar.height});
 	display: flex;
-	justify-content: center;
-	align-items: self-start;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
 	padding: 4rem;
+	gap: 2rem;
 `;
 
-export const StyledMyShopContainer = styled.div`
+export const StyledMyShopContainer = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;

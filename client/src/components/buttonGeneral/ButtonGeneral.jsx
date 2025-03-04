@@ -1,8 +1,12 @@
 import { StyledButton } from './buttonGeneral.styles';
 
-const ButtonGeneral = ({ children, color, onClick }) => {
+const ButtonGeneral = ({ children, color, onClick, type }) => {
 	return (
-		<StyledButton type='button' $color={color} onClick={onClick}>
+		<StyledButton
+			type={type ? `${type}` : 'button'}
+			$color={color}
+			onClick={onClick}
+		>
 			{children}
 		</StyledButton>
 	);

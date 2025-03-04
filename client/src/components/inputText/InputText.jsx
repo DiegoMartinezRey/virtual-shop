@@ -13,6 +13,7 @@ const InputText = ({ type, placeholder, label, value, onChange }) => {
 				placeholder={placeholder}
 				value={value}
 				onChange={onChange}
+				required
 			/>
 		</StyledInputContainer>
 	);

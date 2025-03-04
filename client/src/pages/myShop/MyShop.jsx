@@ -54,7 +54,8 @@ const MyShop = () => {
 
 	return (
 		<StyledMyShopPage>
-			<StyledMyShopContainer>
+			<h2>Add Product</h2>
+			<StyledMyShopContainer onSubmit={createProduct}>
 				<InputText
 					type='string'
 					label={'Name'}
@@ -88,8 +89,9 @@ const MyShop = () => {
 					onChange={e => setCategoryProduct(e.target.value)}
 				/>
 				<ButtonGeneral
+					type={'submit'}
 					color={props => props.theme.colors.secondary}
-					onClick={createProduct}
+					// onClick={createProduct}
 				>
 					Publish
 				</ButtonGeneral>

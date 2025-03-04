@@ -2,6 +2,9 @@ export const theme = {
 	navBar: {
 		height: '70px'
 	},
+	footer: {
+		height: '15rem'
+	},
 	colors: {
 		primary: '#0f0f0f',
 		secondary: '#00AE02',

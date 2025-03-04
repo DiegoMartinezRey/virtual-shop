@@ -1,5 +1,7 @@
+import { StyledHomePage } from './home.styles';
+
 const Home = () => {
-	return <div>Home</div>;
+	return <StyledHomePage>Home</StyledHomePage>;
 };
 
 export default Home;

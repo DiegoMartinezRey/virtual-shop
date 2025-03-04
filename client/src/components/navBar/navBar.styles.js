@@ -23,13 +23,24 @@ const StyledLogo = styled.img`
 `;
 
 const StyledMenu = styled.div`
+	display: none;
+
+	@media screen and (min-width: 768px) {
+		display: flex;
+		flex-direction: row;
+		gap: 15px;
+		font-weight: 900;
+	}
+`;
+
+const StyledMenuMobile = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
 	font-weight: 900;
 
-	@media screen and (width>767px) {
-		flex-direction: row;
+	@media screen and (min-width: 768px) {
+		display: none;
 	}
 `;
 
@@ -65,21 +76,24 @@ const StyledMenuBurger = styled.div`
 		cursor: pointer;
 	}
 
-	@media screen and (width>767px) {
+	@media screen and (min-width: 768px) {
 		display: none;
 	}
 `;
 
 const StyledMenuBar = styled.div`
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 100vh;
-	top: ${({ $showMenuBar }) => ($showMenuBar ? '0' : '-100vh')};
+	top: 0;
+	left: ${({ $showMenuBar }) => ($showMenuBar ? '0' : '-100%')};
 	background-color: ${props => props.theme.colors.secondary};
-	opacity: ${({ $showMenuBar }) => ($showMenuBar ? '1' : '0.5')};
-	left: 0;
-	transition: all 0.4s ease-in-out;
-	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: left 0.3s ease-in-out;
+	z-index: 100;
 `;
 
 const StyledCloseMenu = styled.div`
@@ -95,6 +109,7 @@ export {
 	StyledMenu,
 	StyledMenuBar,
 	StyledMenuBurger,
+	StyledMenuMobile,
 	StyledMenuSpan,
 	StyledNavBar,
 	StyledOptionsNavBar

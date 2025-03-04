@@ -8,6 +8,10 @@ const ProtectedRoute = ({ children }) => {
 		return <Navigate to='/' />;
 	}
 
+	if (!isAuthenticated) {
+		return <Navigate to='/sign-in' />;
+	}
+
 	return children;
 };
 

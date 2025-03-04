@@ -21,27 +21,27 @@ const Router = () => {
 				<Routes>
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Home />} />
-						<Route
-							path='/sign-in'
-							element={
-								<ProtectedRoute>
-									<Login />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path='/sign-up'
-							element={
-								<ProtectedRoute>
-									<Register />
-								</ProtectedRoute>
-							}
-						/>
+						<Route path='/sign-in' element={<Login />} />
+						<Route path='/sign-up' element={<Register />} />
 						<Route path='/products' element={<Products />} />
 						<Route path='/about-us' element={<AboutUs />} />
-						<Route path='/my-shop' element={<MyShop />} />
+						<Route
+							path='/my-shop'
+							element={
+								<ProtectedRoute>
+									<MyShop />
+								</ProtectedRoute>
+							}
+						/>
 						<Route path='/cart' element={<ShoppingCart />} />
-						<Route path='/profile' element={<Profile />} />
+						<Route
+							path='/profile'
+							element={
+								<ProtectedRoute>
+									<Profile />
+								</ProtectedRoute>
+							}
+						/>
 						<Route path='*' element={<h1>Not Fount</h1>} />
 					</Route>
 				</Routes>

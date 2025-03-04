@@ -14,8 +14,8 @@ const userController = {
   },
   getUserById: async (req, res) => {
     try {
-      const userInfo = req.params.id;
-      const user = await User.findOne({ _id: userInfo }).populate("bookings");
+      const userId = req.params.id;
+      const user = await User.findById({ _id: userId });
       return res.json(user);
     } catch (error) {
       res.status(500).send("Not find any user");

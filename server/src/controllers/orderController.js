@@ -11,15 +11,19 @@ const orderController = {
   },
   getOrderById: async (req, res) => {
     try {
-      const _id = req.params.id;
-      const orders = await Order.findById({ _id });
+      const userId = req.params.id;
 
-      if (!orders) {
-        return res.status(404).send("Order not found");
+      const orders = await Order.find({ user: userId }).populate(
+        "items.product"
+      );
+
+      if (!orders || orders.length === 0) {
+        return res.status(404).send("Orders not found");
       }
 
       return res.json(orders);
     } catch (error) {
+      console.error("Error fetching orders:", error);
       res.status(500).send("Not find any product");
     }
   },

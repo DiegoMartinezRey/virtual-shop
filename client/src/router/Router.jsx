@@ -8,6 +8,7 @@ import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import MyShop from '../pages/myShop/MyShop';
 import Products from '../pages/products/Products';
+import Profile from '../pages/profile/Profile';
 import Register from '../pages/register/Register';
 import ShoppingCart from '../pages/shoppingCart/ShoppingCart';
 
@@ -25,6 +26,7 @@ const Router = () => {
 						<Route path='/about-us' element={<AboutUs />} />
 						<Route path='/my-shop' element={<MyShop />} />
 						<Route path='/cart' element={<ShoppingCart />} />
+						<Route path='/profile' element={<Profile />} />
 					</Route>
 				</Routes>
 			</CartProvider>

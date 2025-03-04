@@ -13,9 +13,7 @@ const useAxiosInterceptor = () => {
 					error.response &&
 					(error.response.status === 401 || error.response.status === 400)
 				) {
-					console.log(
-						'Token inválido o sesión expirada. Redirigiendo a login...'
-					);
+					alert('Token inválido o sesión expirada. Redirigiendo a login...');
 					navigate('/sign-in');
 				}
 				return Promise.reject(error);

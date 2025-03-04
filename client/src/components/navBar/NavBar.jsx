@@ -3,9 +3,12 @@ import { FaBars, FaShoppingCart, FaTimes, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import {
 	StyledCloseMenu,
+	StyledIconOptions,
+	StyledLogo,
 	StyledMenu,
 	StyledMenuBar,
 	StyledMenuBurger,
+	StyledMenuSpan,
 	StyledNavBar,
 	StyledOptionsNavBar
 } from './navBar.styles';
@@ -21,19 +24,33 @@ const NavBar = () => {
 
 	const MenuOptions = () => (
 		<StyledMenu>
-			<span onClick={() => navigate('/products')}>Products</span>
-			<span onClick={() => navigate('/about-us')}>About Us</span>
-			<span onClick={() => navigate('/my-shop')}>My shop</span>
+			<StyledMenuSpan onClick={() => navigate('/products')}>
+				Products
+			</StyledMenuSpan>
+			<StyledMenuSpan onClick={() => navigate('/about-us')}>
+				About Us
+			</StyledMenuSpan>
+			<StyledMenuSpan onClick={() => navigate('/my-shop')}>
+				My shop
+			</StyledMenuSpan>
 		</StyledMenu>
 	);
 
 	return (
 		<StyledNavBar>
-			<span>Shop</span>
+			<StyledLogo
+				src='/assets/images/single_logo.png'
+				alt='logo'
+				onClick={() => navigate('/')}
+			/>
 			<MenuOptions />
 			<StyledOptionsNavBar>
-				<FaShoppingCart onClick={() => navigate('/cart')} />
-				<FaUser />
+				<StyledIconOptions>
+					<FaShoppingCart onClick={() => navigate('/cart')} />
+				</StyledIconOptions>
+				<StyledIconOptions>
+					<FaUser onClick={() => navigate('/profile')} />
+				</StyledIconOptions>
 				<StyledMenuBurger onClick={handleMenuBar}>
 					<FaBars />
 				</StyledMenuBurger>

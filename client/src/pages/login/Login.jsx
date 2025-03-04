@@ -14,11 +14,16 @@ const Login = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 
-	const { login } = useAuth();
+	const { user, login } = useAuth();
 
 	const navigate = useNavigate();
 
 	const url = import.meta.env.VITE_API_URL;
+
+	if (user) {
+		navigate('/');
+		return null;
+	}
 
 	const loginUser = async () => {
 		try {

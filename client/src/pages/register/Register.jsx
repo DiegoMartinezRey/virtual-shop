@@ -16,7 +16,7 @@ const Register = () => {
 	const [lastNameInput, setLastNameInput] = useState('');
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	const { user } = useAuth();
 
@@ -49,7 +49,7 @@ const Register = () => {
 		} catch (error) {
 			console.log('Error: ', error);
 		} finally {
-			setLoading(false);
+			setLoading(true);
 		}
 	};
 

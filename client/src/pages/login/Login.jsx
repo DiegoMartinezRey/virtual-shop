@@ -14,7 +14,7 @@ import {
 const Login = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	const { user, login } = useAuth();
 
@@ -49,7 +49,7 @@ const Login = () => {
 		} catch (error) {
 			console.log('Error: ', error);
 		} finally {
-			setLoading(false);
+			setLoading(true);
 		}
 	};
 

@@ -43,8 +43,8 @@ const Profile = () => {
 					Authorization: `Bearer ${user.token}`
 				}
 			});
-			if (!responseOrders.data) {
-				console.error("Can't get orders data");
+			if (!responseOrders.data || !Array.isArray(responseOrders.data)) {
+				console.error("Can't get orders data or data is not an array");
 				return;
 			}
 			setUserOrders(responseOrders.data);
@@ -81,8 +81,7 @@ const Profile = () => {
 			</StyledProfileContainer>
 			<h2>History Orders</h2>
 			<StyledProfileContainer>
-				{!loading &&
-					userOrders &&
+				{!loading && userOrders.length > 0 ? (
 					userOrders.map(order => (
 						<div key={order._id}>
 							<span>Ref: {order._id}</span>
@@ -98,7 +97,10 @@ const Profile = () => {
 							</ul>
 							<span>Total: {order.totalAmount}€</span>
 						</div>
-					))}
+					))
+				) : (
+					<span>No orders found</span>
+				)}
 			</StyledProfileContainer>
 		</StyledProfilePage>
 	);

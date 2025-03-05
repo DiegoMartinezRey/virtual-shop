@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		verify();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const login = userData => {
@@ -35,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 		} catch (error) {
 			console.error('Error en la verificación del token:', error);
 		} finally {
-			setLoading(false);
+			setLoading(false); // Termina la verificación y cambia el estado de carga
 		}
 	};
 

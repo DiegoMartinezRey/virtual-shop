@@ -13,18 +13,20 @@ const orderController = {
     try {
       const userId = req.params.id;
 
-      const orders = await Order.find({ user: userId }).populate(
-        "items.product"
-      );
+      const orders = await Order.find({ user: userId });
 
       if (!orders || orders.length === 0) {
-        return res.status(404).send("Orders not found");
+        return res.status(203).send("Orders not found");
       }
 
-      return res.json(orders);
+      const populatedOrders = await Order.populate(orders, {
+        path: "items.product",
+      });
+
+      return res.json(populatedOrders);
     } catch (error) {
       console.error("Error fetching orders:", error);
-      res.status(500).send("Not find any product");
+      res.status(500).send("Error fetching orders");
     }
   },
   addOrder: async (req, res) => {

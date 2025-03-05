@@ -70,12 +70,12 @@ const userController = {
       const userFound = await User.findOne({ email }).select("+password");
 
       if (!userFound) {
-        return res.status(401).json({ msg: "User not found" });
+        return res.status(400).json({ msg: "User not found" });
       }
 
       const isMatch = await bcrypt.compare(password, userFound.password);
       if (!isMatch) {
-        return res.status(403).json({ msg: "Password does not match" });
+        return res.status(400).json({ msg: "Invalid password" });
       }
 
       const token = jwt.sign(

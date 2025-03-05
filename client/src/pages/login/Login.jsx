@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
 import InputText from '../../components/inputText/InputText';
@@ -14,6 +14,7 @@ import {
 const Login = () => {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
+	const [loading, setLoading] = useState(true);
 
 	const { user, login } = useAuth();
 
@@ -21,12 +22,15 @@ const Login = () => {
 
 	const url = import.meta.env.VITE_API_URL;
 
-	if (user) {
-		navigate('/');
-		return null;
-	}
+	useEffect(() => {
+		if (user) {
+			navigate('/');
+		}
+	}, [user, navigate]);
 
-	const loginUser = async () => {
+	const loginUser = async e => {
+		e.preventDefault();
+
 		try {
 			const response = await axios.post(`${url}/user/login`, {
 				email: emailInput,
@@ -37,13 +41,15 @@ const Login = () => {
 				login(response.data);
 				navigate('/');
 			} else {
-				console.log('Error al iniciar sesión');
+				alert('Email or password incorrect');
 			}
 
 			setEmailInput('');
 			setPasswordInput('');
 		} catch (error) {
 			console.log('Error: ', error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -51,7 +57,7 @@ const Login = () => {
 		<StyledLoginPage>
 			<StyledLoginContainer>
 				<h1>Sign In</h1>
-				<StyledLoginForm>
+				<StyledLoginForm onSubmit={loginUser}>
 					<InputText
 						type='email'
 						label={'Email'}
@@ -65,14 +71,14 @@ const Login = () => {
 						onChange={e => setPasswordInput(e.target.value)}
 					/>
 					<ButtonGeneral
+						type={'submit'}
 						color={props => props.theme.colors.secondary}
-						onClick={loginUser}
 					>
-						Sign In
+						{loading ? 'Loading...' : 'Sign In'}
 					</ButtonGeneral>
 				</StyledLoginForm>
 				<p>
-					Don`t have an account?{' '}
+					Don’t have an account?{' '}
 					<StyledSpanAccount onClick={() => navigate('/sign-up')}>
 						Register
 					</StyledSpanAccount>

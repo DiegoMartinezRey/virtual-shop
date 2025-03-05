@@ -1,98 +1,80 @@
-import styled from 'styled-components';
-
-const StyledHomePage = styled.div`
-	section {
-		padding: 3rem 1rem;
-
-		&:first-of-type {
-			background-color: ${props => props.theme.colors.background};
-			padding: 4rem 1rem;
-		}
-
-		&:nth-of-type(2) {
-			background-color: ${props => props.theme.colors.primary};
-		}
-	}
-`;
-
-const Title = styled.h1`
-	font-size: ${props => props.theme.fontSizes.text_2xl};
-	color: ${props => props.theme.colors.primary};
-`;
-
-const Subtitle = styled.h2`
-	font-size: ${props => props.theme.fontSizes.text_xl};
-	color: ${props => props.theme.colors.red};
-	margin-bottom: 2rem;
-`;
-
-const SectionTitle = styled.h3`
-	color: ${props => props.theme.colors.secondary};
-	font-size: ${props => props.theme.fontSizes.text_l};
-`;
-
-const Paragraph = styled.p`
-	font-size: ${props => props.theme.fontSizes.text_s};
-	margin: 2rem 0;
-`;
-
-const LinkButton = styled.a`
-	background-color: ${props => props.theme.colors.secondary};
-	color: ${props => props.theme.colors.text};
-	padding: 1rem 2rem;
-	border-radius: 8px;
-	font-size: ${props => props.theme.fontSizes.text_s};
-	text-decoration: none;
-`;
-
-const FlexContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-`;
+import { useNavigate } from 'react-router-dom';
+import ButtonGeneral from '../../components/buttonGeneral/ButtonGeneral';
+import {
+	StyledButtonContainer,
+	StyledFirstContainer,
+	StyledHomePage,
+	StyledImgContainer,
+	StyledSecondContainer
+} from './home.styles';
 
 const Home = () => {
+	const navigate = useNavigate();
 	return (
 		<StyledHomePage>
-			<section>
-				<FlexContainer>
-					<Title>
-						Descubre tu próximo par favorito en{' '}
-						<span style={{ color: 'inherit' }}>vShop</span>
-					</Title>
-					<Paragraph>
-						Calzado que combina estilo, comodidad y tecnología para todos tus
-						momentos
-					</Paragraph>
-					<LinkButton href='/productos'>Ver Colección Completa</LinkButton>
-				</FlexContainer>
-			</section>
-
-			<section>
-				<Subtitle>🔥 Ofertas Relámpago</Subtitle>
-				<FlexContainer>
-					<FlexContainer>
-						<SectionTitle>Hasta 50% OFF</SectionTitle>
-						<Paragraph>En selección de zapatillas deportivas</Paragraph>
-					</FlexContainer>
-					<FlexContainer>
-						<SectionTitle>Envío Gratis</SectionTitle>
-						<Paragraph>En compras superiores a $150.000</Paragraph>
-					</FlexContainer>
-				</FlexContainer>
-			</section>
-
-			<section>
-				<Subtitle>¿Por qué elegir vShop?</Subtitle>
-				<FlexContainer>
-					<FlexContainer>
-						<div style={{ color: 'inherit', fontSize: 'inherit' }}>✔️</div>
-						<SectionTitle>Garantía de Autenticidad</SectionTitle>
-						<Paragraph>Todos nuestros productos son 100% originales</Paragraph>
-					</FlexContainer>
-					<FlexContainer></FlexContainer>
-				</FlexContainer>
-			</section>
+			<StyledFirstContainer>
+				<StyledImgContainer />
+				<StyledButtonContainer>
+					<ButtonGeneral
+						color={props => props.theme.colors.secondary}
+						onClick={() => navigate('/products')}
+					>
+						See complete collection
+					</ButtonGeneral>
+				</StyledButtonContainer>
+			</StyledFirstContainer>
+			<StyledSecondContainer>
+				<div>
+					<h2>Bienvenido a vShop</h2>
+					<p>Tu destino en línea para el calzado de calidad.</p>
+				</div>
+				<div>
+					<h3>Destacados</h3>
+					<p>
+						Explora nuestra selección de productos más populares, donde la
+						comodidad y el estilo se encuentran.
+					</p>
+				</div>
+				<div>
+					<h3>Beneficios</h3>
+					<p>Disfruta de beneficios exclusivos al comprar con nosotros</p>
+					<ul>
+						<li>
+							Variedad Inigualable: Encuentra diseños para todos los gustos y
+							ocasiones.
+						</li>
+						<li>
+							Calidad Garantizada: Trabajamos con marcas reconocidas para
+							ofrecerte lo mejor.
+						</li>
+						<li>
+							Envíos Rápidos: Recibe tus pedidos en tiempo récord, directamente
+							en tu hogar.
+						</li>
+						<li>
+							Atención Personalizada: Nuestro equipo está siempre dispuesto a
+							ayudarte en todo momento.
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Testimonios</h3>
+					<ul>
+						<li>“Excelente servicio y productos de alta calidad. </li>
+						<li>¡Recomiendo totalmente vShop!” </li>
+						<li>
+							“La variedad de calzado es impresionante. Siempre encuentro lo que
+							busco.”
+						</li>
+					</ul>
+				</div>
+				<div>
+					<p>
+						No esperes más para renovar tu guardarropa. Explora nuestra
+						colección y encuentra el par perfecto para ti.
+					</p>
+				</div>
+			</StyledSecondContainer>
 		</StyledHomePage>
 	);
 };

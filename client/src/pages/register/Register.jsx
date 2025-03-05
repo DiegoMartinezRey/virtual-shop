@@ -16,6 +16,7 @@ const Register = () => {
 	const [lastNameInput, setLastNameInput] = useState('');
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
+	const [loading, setLoading] = useState(true);
 
 	const { user } = useAuth();
 
@@ -28,7 +29,9 @@ const Register = () => {
 		return null;
 	}
 
-	const registerUser = async () => {
+	const registerUser = async e => {
+		e.preventDefault();
+
 		try {
 			await axios.post(`${url}/user/create`, {
 				name: nameInput,
@@ -45,6 +48,8 @@ const Register = () => {
 			setPasswordInput('');
 		} catch (error) {
 			console.log('Error: ', error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -52,7 +57,7 @@ const Register = () => {
 		<StyledRegisterPage>
 			<StyledRegisterContainer>
 				<h1>Sign Up</h1>
-				<StyledRegisterForm>
+				<StyledRegisterForm onSubmit={registerUser}>
 					<InputText
 						type='text'
 						label={'Name'}
@@ -86,10 +91,10 @@ const Register = () => {
 						}}
 					/>
 					<ButtonGeneral
+						type={'submit'}
 						color={props => props.theme.colors.secondary}
-						onClick={registerUser}
 					>
-						Sign Up
+						{loading ? 'Loading...' : 'Sign Up'}
 					</ButtonGeneral>
 				</StyledRegisterForm>
 				<p>
